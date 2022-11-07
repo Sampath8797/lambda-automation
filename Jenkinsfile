@@ -11,10 +11,11 @@ pipeline {
                 }
                 script {
                     def AWS_PROFILE       = 'cd-sandbox'
-                    def DEPLOY_ROLE       = 'arn:aws:iam::221283034294:role/deploy_role'
-                      sh "source ci/assume_role.sh ${DEPLOY_ROLE} ${AWS_PROFILE}"
+                      sh "export AWS_PROFILE=cd-sandbox"
+                      sh "aws lambda update-function-code --function-name lambda-automation-test --zip-file fileb://lambda-function.zip"
                 }
             } 
         }
     }
+  }
 }
