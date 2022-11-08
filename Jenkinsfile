@@ -4,7 +4,7 @@ pipeline {
     stage('Lambda Deployment') {
       when { branch 'develop'}
       steps {
-        timeout(time: 150, unit: 'seconds') {
+        timeout(time: 150, unit: 'SECONDS') {
           input "Replace Lambda Source Code ?"
         }
         script {
