@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+    agent{
+        node{ 
+            label 'Built-In' 
+            }
+        }
   stages {
     stage('Lambda Deployment') {
       when { branch 'develop'}
@@ -10,8 +14,7 @@ pipeline {
         script {
           sh "export AWS_PROFILE=cd-sandbox"
           sh "aws --version"
-          sh "aws s3 ls"
-          sh "aws lambda update-function-code --function-name lambda-automation-test --zip-file fileb://lambda-function.zip --region us-east-1"
+          sh "aws lambda update-function-code --function-name lambda-automation-test --zip-file fileb://lambda-function.zip"
         }
       }
     }
