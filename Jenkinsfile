@@ -1,17 +1,18 @@
 pipeline {
   agent any
   stages {
-        stage('Lambda Deployment') {
-            when { branch 'develop' }
-            steps {
-                timeout(time: 100, unit: 'SECONDS') {
-                    input "Lambda Source Code Deployment ?"
-                }
-                script {
-                      sh "export AWS_PROFILE=cd-sandbox"
-                      sh "aws lambda update-function-code --function-name lambda-automation-test --zip-file fileb://lambda-function.zip"
-                }
-            } 
+    stage('Lambda Deployment') {
+      when { branch 'develop'}
+      steps {
+        timeout(time: 150, unit: 'seconds') {
+          input "Replace Lambda Source Code ?"
+        }
+        script {
+          sh "export AWS_PROFILE=cd-sandbox"
+          sh "aws --version"
+          sh "aws lambda update-function-code --function-name lambda-automation-test --zip-file fileb://lambda-function.zip"
+        }
+      }
     }
   }
 }
